@@ -1,0 +1,17 @@
+# Decisões de Migração de Portfólio
+
+**1. Escolha um R para o sistema de faturamento e defenda a escolha citando dois fatos do caso. Diga também qual R você quase escolheu e o que o desqualificou.**
+A escolha é Rehost. Os dois fatos que sustentam essa decisão são: o sistema foi escrito numa linguagem que ninguém da equipe atual domina, tornando a alteração de código inviável; e ele só precisa sobreviver por mais dois anos devido à exigência da auditoria externa.
+
+**2. Escolha um R para o portal de agendamento. Explique por que replatform e refactor levam a resultados diferentes para o problema do pico de segunda-feira, e diga qual dos dois resolve o problema da publicação de seis horas.**
+A escolha é Refactor. Em relação ao pico de segunda-feira, o Replatform tentaria resolver o problema adicionando mais poder de processamento ao monolito inteiro, enquanto o Refactor quebra o sistema em partes menores, permitindo que a nuvem escale especificamente o motor de agendamentos para lidar com a carga. O Refactor é o que resolve o problema da publicação de seis horas, pois, ao fragmentar o monolito, permite que a equipe atualize e publique apenas os serviços que foram alterados, em vez de recompilar e derrubar todo o portal.
+
+**3. Escolha um R para o controle de estoque da farmácia e descreva o que precisa acontecer com as duas funções que o ERP ainda não cobre antes que a escolha seja executável.**
+A escolha é Retire. Antes que seja executável desligar o sistema antigo, a equipe de TI precisará construir e disponibilizar os dois relatórios (as duas funções restantes) dentro do novo ERP corporativo. Como o ERP já domina a entrada de dados, basta criar essas visões para a farmácia usar. Somente após isso o sistema antigo poderá ser aposentado.
+
+**4. As três decisões competem pela mesma equipe de cinco pessoas. Ordene as três aplicações por ordem de execução e justifique a ordem pela restrição de dezoito meses.**
+A ordem ideal é: 1º) Controle de Estoque (Retire); 2º) Faturamento (Rehost); 3º) Portal de Agendamento (Refactor). 
+A restrição de 18 meses com apenas 5 pessoas exige liberação rápida de carga de trabalho. O Retire é a tarefa mais rápida e já elimina um sistema inteiro. O Rehost resolve de maneira automatizada e segura a exigência de compliance, garantindo a sobrevida exigida antes que o tempo aperte. Deixar o Portal por último permite que a equipe, agora livre das manutenções dos dois primeiros sistemas, invista o longo tempo restante dedicada exclusivamente à complexidade de refatorar o monolito.
+
+**5. Para a aplicação que você colocou em primeiro lugar, escreva a evidência que, seis meses depois, confirmaria que o R escolhido foi o certo, e a evidência que indicaria que foi o errado.**
+Para o Controle de Estoque da Farmácia, a evidência de que a escolha foi certa seria constatar, após seis meses, que o servidor antigo já foi desligado e que a equipe da farmácia está gerando seus relatórios sem problemas pelo ERP. A evidência de que a escolha foi errada seria ver o servidor do sistema antigo ainda ligado, pois descobriu-se tardiamente que o ERP não possuía flexibilidade para emitir os relatórios no formato exigido, forçando a equipe a dar suporte em dois sistemas paralelos e perdendo um tempo valioso dos 18 meses.
